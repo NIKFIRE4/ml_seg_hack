@@ -9,11 +9,14 @@ import rasterio
 from fastapi import FastAPI, UploadFile, File
 import shutil
 from typing import List
+import uvicorn
 import zipfile
 import io
 from os import path
 import root
 app = FastAPI()
+# Загрузка модели
+model_best = YOLO("best.pt")
 # Функция для масштабирования изображения
 def upscale_image(image, scale_factor):
     image = Image.open(image)
@@ -40,10 +43,6 @@ rescale_dict = {
     "20m" : 2,
     "60m" : 6,
 }
-
-# Загрузка модели
-model_best = YOLO("best.pt")
-
 
 @app.post("/uploadfile/")
 async def create_upload_file(file: UploadFile):
