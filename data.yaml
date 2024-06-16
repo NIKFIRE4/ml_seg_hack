@@ -1,0 +1,7 @@
+names:
+- fire
+- glade
+nc: 2
+test: validation/images
+train: datasets/train/images
+val: datasets/validation/images
